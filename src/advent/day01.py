@@ -10,14 +10,12 @@ class Dial:
         """True if landed on 0, False otherwise."""
 
         self._position = (self._position - distance) % 100
-        #print(f"new position: ", self.position)
         return True if self._position == 0 else False
 
     def turn_right(self, distance: int) -> bool:
         """True if landed on 0, False otherwise."""
 
         self._position = (self._position + distance) % 100
-        #print(f"new position: ", self._position)
         return True if self._position == 0 else False
 
 class CounterDial:
@@ -66,6 +64,7 @@ class Day01(DailyChallenge):
         zeroes: int = 0
         dial = Dial()
         rotations: list[str] = self.line_to_list(data, False)
+
         for rotation in rotations:
             distance = int(rotation[1:])
             if rotation.startswith("L"):
@@ -82,7 +81,7 @@ class Day01(DailyChallenge):
         data = self.part2_data if not use_sample_data else self.sample_data
         dial = CounterDial()
         rotations: list[str] = self.line_to_list(data, False)
-        print(f"len rot= {len(rotations)}")
+
         for rotation in rotations:
             distance = int(rotation[1:])
             if rotation.startswith("L"):

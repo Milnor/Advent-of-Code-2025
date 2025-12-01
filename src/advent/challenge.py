@@ -45,5 +45,4 @@ class DailyChallenge(ABC):
                 for line in file.readlines():
                     data_set.append(line.strip())
 
-            print(f"{data_set=}")
             return data_set
