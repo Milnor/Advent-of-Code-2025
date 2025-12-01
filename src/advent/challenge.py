@@ -12,16 +12,28 @@ class DailyChallenge(ABC):
         self.sample_data = sample
 
     @abstractmethod
-    def part1(self, use_sample_data: bool=False) -> int:
+    def _part1(self, use_sample_data: bool=False) -> int:
         pass
 
     @abstractmethod
-    def part2(self) -> int:
+    def _part2(self, use_sample_data: bool=False) -> int:
         pass
 
     @property
-    def sample(self) -> int:
-        return self.part1(True)
+    def part1(self) -> int:
+        return self._part1()
+    
+    @property
+    def part2(self) -> int:
+        return self._part2()
+
+    @property
+    def sample1(self) -> int:
+        return self._part1(True)
+
+    @property
+    def sample2(self) -> int:
+        return self._part2(True)
 
     def line_to_list(self, data: Path, is_int: bool) -> list[int | str]:
         with open(data, "r", encoding="utf-8") as file:
