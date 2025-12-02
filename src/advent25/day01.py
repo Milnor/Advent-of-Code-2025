@@ -1,4 +1,6 @@
-from src.advent import DailyChallenge
+"""My solution to Day 1."""
+
+from src.advent25 import DailyChallenge
 
 class Dial:
     """Dial that returns True whenever a rotation lands on 0."""
@@ -56,14 +58,14 @@ class CounterDial:
 
 class Day01(DailyChallenge):
     """
-    The first day's challenges.
+    Day 1: Secret Entrance
     """
 
     def _part1(self, use_sample_data: bool=False) -> int:
         data = self.part1_data if not use_sample_data else self.sample_data
         zeroes: int = 0
         dial = Dial()
-        rotations: list[str] = self.line_to_list(data, False)
+        rotations: list[str] = self.line_to_list(data)
 
         for rotation in rotations:
             distance = int(rotation[1:])
@@ -80,7 +82,7 @@ class Day01(DailyChallenge):
     def _part2(self, use_sample_data: bool=False) -> int:
         data = self.part2_data if not use_sample_data else self.sample_data
         dial = CounterDial()
-        rotations: list[str] = self.line_to_list(data, False)
+        rotations: list[str] = self.line_to_list(data)
 
         for rotation in rotations:
             distance = int(rotation[1:])

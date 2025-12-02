@@ -26,7 +26,7 @@ ignore=third_party
 
 # Files or directories matching the regex patterns are skipped. The regex
 # matches against base names, not paths.
-ignore-patterns=
+ignore-patterns=test
 
 # Pickle collected data for later comparisons.
 persistent=no
@@ -156,7 +156,7 @@ output-format=text
 reports=no
 
 # Activate the evaluation score.
-score=no
+score=yes
 
 # Python expression which should return a note less than 10 (10 is the highest
 # note). You have access to the variables errors warning, statement which

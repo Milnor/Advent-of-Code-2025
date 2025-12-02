@@ -1,0 +1,18 @@
+[project]
+name = "advent25"
+version = "0.1.0"
+description = "Advent of Code 2025 in Python"
+requires-python = ">=3.10"
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "coverage",
+    "mypy",
+    "pylint",
+    "ruff",
+]
+
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"

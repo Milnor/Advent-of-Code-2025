@@ -71,8 +71,11 @@ classDiagram
 
 ## Timeline
 
-* Days 1-2 - rough draft-y code; install dev dependencies
-* Days 3-5 - finalize `DailyChallenge`, its factory, and unittest format
-  * Add cover art to README once the overall theme is clearer
-* Days 6-11 - do the challenges; clean up linting and type checking
-* Day 12 - revise docs, doublecheck pylint, mypy, etc.
+* [x] Days 1-2 - rough draft-y code; install dev dependencies
+
+* [-] Days 3-5 - finalize `DailyChallenge`, its factory, and unittest format
+  * [-] Add cover art to README once the overall theme is clearer
+
+* [-] Days 6-11 - do the challenges; clean up linting and type checking
+
+* [-] Day 12 - revise docs, doublecheck pylint, mypy, etc.

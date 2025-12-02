@@ -1,4 +1,6 @@
-from src.advent import DailyChallenge
+"""My solution to Day 2."""
+
+from src.advent25 import DailyChallenge
 
 # Note: Not a @staticmethod of InvalidIDTotaler as per the Google Python Style
 #  Guide.
@@ -14,11 +16,13 @@ def is_invalid(number: str) -> bool:
     for size in range(1, len(number) // 2 + 1):
         # Adapted from list comprehension example in Google AI Overview on
         #  "python split string into n pieces".
-        chunks: set[str] = {number[i:i+size] for i in range(0, len(number), size)}
+        chunks: set[str] = {
+            number[i:i+size] for i in range(0, len(number), size)
+        }
         # Sets do not allow duplicates, so...
         if len(chunks) == 1:
             return True
-        
+
     return False
 
 class InvalidIDTotaler:
@@ -27,10 +31,9 @@ class InvalidIDTotaler:
     def __init__(self, ranges: list[str]):
         self._data: list[str] = []
         for numbers in ranges:
-            #print(f"{numbers=}")
-            lower, upper = numbers.split("-")
-            lower = int(lower)
-            upper = int(upper) + 1
+            lower_str, upper_str = numbers.split("-")
+            lower = int(lower_str)
+            upper = int(upper_str) + 1
             for number in range(lower, upper):
                 # We could filter out numbers without an even number of digits
                 #  here, but we don't know yet whether we'll need the full
@@ -50,7 +53,7 @@ class InvalidIDTotaler:
             if first == second:
                 total += int(number)
         return total
-    
+
     @property
     def invalid_total_2(self) -> int:
         """Totals all numbers consisting of repeating sequences."""
@@ -71,7 +74,7 @@ class Day02(DailyChallenge):
         id_processor = InvalidIDTotaler(ranges)
 
         return id_processor.invalid_total_1
-    
+
     def _part2(self, use_sample_data: bool=False) -> int:
         data = self.part1_data if not use_sample_data else self.sample_data
         ranges: list[str] = self.csv_to_list(data)

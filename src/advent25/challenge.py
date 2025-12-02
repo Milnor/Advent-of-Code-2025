@@ -1,3 +1,5 @@
+"""Parent class for the daily challenges."""
+
 from abc import ABC, abstractmethod
 from pathlib import Path
 
@@ -22,7 +24,7 @@ class DailyChallenge(ABC):
     @property
     def part1(self) -> int:
         return self._part1()
-    
+
     @property
     def part2(self) -> int:
         return self._part2()
@@ -50,18 +52,14 @@ class DailyChallenge(ABC):
 
             return data_set
 
-    def line_to_list(self, data: Path, is_int: bool) -> list[int | str]:
+    def line_to_list(self, data: Path) -> list[str]:
         """
-        Parse each line into a list of strings or integers.
+        Parse each line into a list of strings.
         """
 
         with open(data, "r", encoding="utf-8") as file:
-            data_set = []
-            if is_int:
-                for line in file.readlines():
-                    data_set.append(int(line.strip()))
-            else:
-                for line in file.readlines():
-                    data_set.append(line.strip())
+            data_set: list[str] = []
+            for line in file.readlines():
+                data_set.append(line.strip())
 
             return data_set
