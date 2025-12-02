@@ -35,7 +35,26 @@ class DailyChallenge(ABC):
     def sample2(self) -> int:
         return self._part2(True)
 
+    def csv_to_list(self, data: Path) -> list[str]:
+        """
+        Parse comma-separated values as a list of strings.
+        """
+
+        with open(data, "r", encoding="utf-8") as file:
+            data_set = []
+            for line in file.readlines():
+                sublines = line.split(",")
+                for subline in sublines:
+                    if "-" in subline:
+                        data_set.append(subline.strip())
+
+            return data_set
+
     def line_to_list(self, data: Path, is_int: bool) -> list[int | str]:
+        """
+        Parse each line into a list of strings or integers.
+        """
+
         with open(data, "r", encoding="utf-8") as file:
             data_set = []
             if is_int:

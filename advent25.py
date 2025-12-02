@@ -4,6 +4,7 @@ from pathlib import Path
 
 from src.advent.challenge import DailyChallenge
 from src.advent.day01 import Day01
+from src.advent.day02 import Day02
 
 RES = "\033[00m"    # RESET
 BLD = "\033[1m"     # BOLD
@@ -27,9 +28,16 @@ def main():
     day1: DailyChallenge = Day01(
         Path("data/day01.txt"),
         Path("data/day01.txt"),
-        Path("data/sample/day01.txt"))
+        Path("data/sample/day01.txt")
+    )
+    
+    day2: DailyChallenge = Day02(
+        Path("data/day02.txt"),
+        Path("data/day02.txt"),
+        Path("data/sample/day02.txt")
+    )
 
-    for day in [day1]:
+    for day in [day1, day2]:
         print(f" {RED}{day.sample1} {GRE}{day.part1} {YEL}{day.sample2} {GRE}{day.part2}{RES}")
     #print(day1.sample1)
     #print(day1.part1)
