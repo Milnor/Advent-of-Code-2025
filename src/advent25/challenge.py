@@ -8,9 +8,8 @@ class DailyChallenge(ABC):
     Configuration and data parsing for a daily challenge.
     """
 
-    def __init__(self, part1: Path, part2: Path, sample: Path):
+    def __init__(self, part1: Path, sample: Path):
         self.part1_data = part1
-        self.part2_data = part2
         self.sample_data = sample
 
     @abstractmethod
@@ -63,3 +62,13 @@ class DailyChallenge(ABC):
                 data_set.append(line.strip())
 
             return data_set
+
+def challenge_factory(challenges: dict[int, type[DailyChallenge]]):
+    dailies: dict[int, DailyChallenge] = {}
+
+    for counter, challenge in challenges.items():
+        real_data: Path = Path(f"data/day{counter:02d}.txt")
+        sample_data: Path = Path(f"data/sample/day{counter:02d}.txt")
+        dailies[counter] = challenge(real_data, sample_data)
+
+    return dailies

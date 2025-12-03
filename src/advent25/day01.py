@@ -80,7 +80,7 @@ class Day01(DailyChallenge):
         return zeroes
 
     def _part2(self, use_sample_data: bool=False) -> int:
-        data = self.part2_data if not use_sample_data else self.sample_data
+        data = self.part1_data if not use_sample_data else self.sample_data
         dial = CounterDial()
         rotations: list[str] = self.line_to_list(data)
 

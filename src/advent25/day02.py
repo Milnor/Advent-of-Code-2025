@@ -65,7 +65,7 @@ class InvalidIDTotaler:
 
 class Day02(DailyChallenge):
     """
-    --- Day 2: Gift Shop ---
+    Day 2: Gift Shop
     """
 
     def _part1(self, use_sample_data: bool=False) -> int:

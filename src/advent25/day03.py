@@ -2,7 +2,7 @@
 
 from src.advent25 import DailyChallenge
 
-_MAX_BATTERIES=12
+_MAX_BATTERIES = 12
 
 def early_max_index(data: list[int]) -> int:
     """
@@ -12,7 +12,7 @@ def early_max_index(data: list[int]) -> int:
     :return: Description
     :rtype: int
     """
-    print(f"operating on: {data}")
+
     index = -1, -1  # index, value
     for i in range(len(data)):
         if data[i] > index[1]:
@@ -58,7 +58,7 @@ def remove_smallest_from_front(data: list[int]) -> list[int]:
 
         if took_action is False:
             victim += 1
-    
+
     return smaller
 
 def total_output_joltage(joltages: list[str]) -> int:
@@ -75,10 +75,12 @@ def total_output_joltage(joltages: list[str]) -> int:
     total: int = 0
     for bank in joltages:
         integers: list[int] = [int(digit) for digit in bank]
-        first_digit_index = early_max_index(integers[:-1])
-        second_digit_index = early_max_index(integers[first_digit_index + 1:]) + first_digit_index + 1
-        subtotal = integers[first_digit_index] * 10 + integers[second_digit_index]
-        print(f"{bank} ==> {subtotal}")
+        first_digit_idx = early_max_index(integers[:-1])
+        second_digit_idx = (
+            early_max_index(integers[first_digit_idx + 1:]) + \
+            first_digit_idx + 1
+        )
+        subtotal = integers[first_digit_idx] * 10 + integers[second_digit_idx]
         total += subtotal
 
     return total
@@ -95,8 +97,8 @@ def total_joltage_12(joltages) -> int:
         only_12: list[int] = remove_smallest_from_front(integers)
         only_12_strings: list[str] = [str(i) for i in only_12]
         subtotal = int("".join(only_12_strings))
-        print(f"{subtotal=}")
         total += subtotal
+
     return total
 
 class Day03(DailyChallenge):
@@ -107,12 +109,6 @@ class Day03(DailyChallenge):
     def _part1(self, use_sample_data: bool=False) -> int:
         data = self.part1_data if not use_sample_data else self.sample_data
         joltages: list[str] = self.line_to_list(data)
-
-        # print("Quick n dirty debug:")
-        # 987654321111111
-        # 811111111111119
-        # 234234234234278
-        # 818181911112111
 
         return total_output_joltage(joltages)
 
