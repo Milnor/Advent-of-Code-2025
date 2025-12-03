@@ -35,7 +35,8 @@ def main(args: argparse.Namespace):
             Path("data/day03.txt"),
             Path("data/sample/day03.txt")
         )
-        print(day3.sample1)
+        print(f"{day3.sample1=}")
+        print(f"{day3.sample2=}")
         exit(1)
 
     day1: DailyChallenge = Day01(
