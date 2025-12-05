@@ -15,7 +15,8 @@ class Cell:
         if self.value == '.':
             return '.'
         elif self.value == '@':
-            return 'x' if self.adjacent <= _THRESHOLD else '@'
+            #return 'x' if len(self.adjacent.split(":")) < _THRESHOLD else '@'
+            return 'x' if self.adjacent < _THRESHOLD else '@'
         else:
             raise ValueError(f"Cell must contain . or @, not {self.value}")
     
@@ -55,44 +56,53 @@ class ForkliftMap:
         for row in range(last_row + 1):
             for col in range(last_col + 1):
                 count: int = 0
+                #count: str = ""
                 # Left
                 if col > 0:
                     if self.rows[row][col - 1].value == '@':
+                        #count += "L:"
                         count += 1
 
                 # Right
                 if col < last_col:
                     if self.rows[row][col + 1].value == '@':
+                        #count += "R:"
                         count += 1
 
                 # Up
                 if row > 0:
                     if self.rows[row - 1][col].value == '@':
+                        #count += "U:"
                         count += 1
 
                 # Down
                 if row < last_row:
                     if self.rows[row + 1][col].value == '@':
+                        #count += "D:"
                         count += 1
 
                 # Upper Left
                 if row > 0 and col > 0:
-                    if self.rows[row - 1][col - 1] == '@':
+                    if self.rows[row - 1][col - 1].value == '@':
+                        #count += "UL:"
                         count += 1
 
                 # Upper Right
                 if row > 0 and col < last_col:
-                    if self.rows[row - 1][col + 1] == '@':
+                    if self.rows[row - 1][col + 1].value == '@':
+                        #count += "UR:"
                         count += 1
 
                 # Lower Left
                 if row < last_row and col > 0:
-                    if self.rows[row + 1][col - 1] == '@':
+                    if self.rows[row + 1][col - 1].value == '@':
+                        #count += "LL:"
                         count += 1
 
                 # Lower Right
                 if row < last_row and col < last_col:
-                    if self.rows[row + 1][col + 1] == '@':
+                    if self.rows[row + 1][col + 1].value == '@':
+                        #count += "LR"
                         count += 1
 
                 self.rows[row][col].adjacent = count
@@ -123,6 +133,7 @@ class ForkliftMap:
         for row in self.rows.values():
             for cell in row:
                 if cell.value == '@' and cell.adjacent < _THRESHOLD:
+                #if cell.value == '@' and len(cell.adjacent.split(':')) < _THRESHOLD:
                     total += 1
 
         return total
