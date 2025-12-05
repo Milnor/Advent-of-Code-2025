@@ -24,6 +24,40 @@
   * flags to limit to just certain day(s) or real challenge vs mini sample
   * logging/debug flag
 
+## Directory Layout
+
+```txt
+Advent-of-Code-2025
+    ├── advent25.py
+    ├── data
+    │   ├── day01.txt
+    │   ├── day02.txt
+    │   ├── day03.txt
+    │   ├── day04.txt
+    │   ├── dayNN.txt
+    │   └── sample
+    │       ├── day01.txt
+    │       ├── day02.txt
+    │       ├── day03.txt
+    │       ├── day04.txt
+    │       └── dayNN.txt
+    ├── docs
+    │   ├── design.md
+    │   └── writeup.md
+    ├── pyproject.toml
+    ├── README.md
+    ├── src
+    │   └── advent25
+    │       ├── challenge.py
+    │       ├── day01.py
+    │       ├── day02.py
+    │       ├── day03.py
+    │       ├── day04.py
+    │       └── __init__.py
+    └── test
+        └── test_challenges.py
+```
+
 ## Class Design
 
 It's an open question whether every day will have sample data for both Part 1

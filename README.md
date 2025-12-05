@@ -3,8 +3,14 @@
 * Install and run (assumes virtual environment in place)
 
 ```bash
-pip install -e .        # editable install, uses source without rebuilding
-pip install -e .[dev]   # dev dependencies
+sudo apt install python3.10-venv
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+```bash
+pip install -e .[dev]   # -e = editable install, use source without rebuild
+                        # [dev] install dev dependencies
 python3 -m advent25
 ```
 

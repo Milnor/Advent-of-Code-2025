@@ -4,7 +4,7 @@ from dataclasses import dataclass
 
 from src.advent25 import DailyChallenge
 
-THRESHOLD: int = 4 # Max adjacent rolls without obstructing forklift.
+_THRESHOLD: int = 4 # Max adjacent rolls without obstructing forklift.
 
 @dataclass
 class Cell:
@@ -15,7 +15,7 @@ class Cell:
         if self.value == '.':
             return '.'
         elif self.value == '@':
-            return 'x' if self.adjacent <= THRESHOLD else '@'
+            return 'x' if self.adjacent <= _THRESHOLD else '@'
         else:
             raise ValueError(f"Cell must contain . or @, not {self.value}")
     
@@ -40,7 +40,8 @@ class ForkliftMap:
         for index, data in self.rows.items():
             current_row: str = f"{index:03d}  "
             for cell in data:
-                current_row += str(cell)
+                #current_row += str(cell)
+                current_row += f"{cell.value}{cell.adjacent} "
             grid += current_row + "\n"
 
         return grid
@@ -50,12 +51,58 @@ class ForkliftMap:
 
         last_row: int = len(self.rows) - 1
         last_col: int = len(self.rows[1]) - 1
+
+        for row in range(last_row + 1):
+            for col in range(last_col + 1):
+                count: int = 0
+                # Left
+                if col > 0:
+                    if self.rows[row][col - 1].value == '@':
+                        count += 1
+
+                # Right
+                if col < last_col:
+                    if self.rows[row][col + 1].value == '@':
+                        count += 1
+
+                # Up
+                if row > 0:
+                    if self.rows[row - 1][col].value == '@':
+                        count += 1
+
+                # Down
+                if row < last_row:
+                    if self.rows[row + 1][col].value == '@':
+                        count += 1
+
+                # Upper Left
+                if row > 0 and col > 0:
+                    if self.rows[row - 1][col - 1] == '@':
+                        count += 1
+
+                # Upper Right
+                if row > 0 and col < last_col:
+                    if self.rows[row - 1][col + 1] == '@':
+                        count += 1
+
+                # Lower Left
+                if row < last_row and col > 0:
+                    if self.rows[row + 1][col - 1] == '@':
+                        count += 1
+
+                # Lower Right
+                if row < last_row and col < last_col:
+                    if self.rows[row + 1][col + 1] == '@':
+                        count += 1
+
+                self.rows[row][col].adjacent = count
+        """
         for row, data in self.rows.items():
             for col, cell in enumerate(data, start=0):
                 count: int = 0
                 # West and East
                 if col > 0:
-                    pass
+                    if self.data
                 if col < last_col:
                     pass
                 # NW, North, NE
@@ -65,7 +112,7 @@ class ForkliftMap:
                 if row < last_row:
                     pass
                 cell.adjacent = count
-
+        """
 
 
     @property
@@ -75,7 +122,7 @@ class ForkliftMap:
         total: int = 0
         for row in self.rows.values():
             for cell in row:
-                if cell.value == '@' and cell.adjacent < THRESHOLD:
+                if cell.value == '@' and cell.adjacent < _THRESHOLD:
                     total += 1
 
         return total
@@ -89,8 +136,9 @@ class Day04(DailyChallenge):
         data = self.part1_data if not use_sample_data else self.sample_data
         forklift_map: list[str] = self.line_to_list(data)
         forkie = ForkliftMap(forklift_map)
-        print(forkie)
+        #print(forkie)
         forkie.update_adjacencies()
+        print(forkie)
         return forkie.accessible_count
 
     def _part2(self, use_sample_data: bool=False) -> int:
