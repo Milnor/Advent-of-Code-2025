@@ -106,23 +106,24 @@ class ForkliftMap:
                         count += 1
 
                 self.rows[row][col].adjacent = count
+
+    def remove_reachable(self) -> int:
         """
-        for row, data in self.rows.items():
-            for col, cell in enumerate(data, start=0):
-                count: int = 0
-                # West and East
-                if col > 0:
-                    if self.data
-                if col < last_col:
-                    pass
-                # NW, North, NE
-                if row > 0:
-                    pass
-                # SW, South, SE
-                if row < last_row:
-                    pass
-                cell.adjacent = count
+        Remove every accessible roll of paper and return how many rolls were
+        removed with each pass.
         """
+        last_row: int = len(self.rows) - 1
+        last_col: int = len(self.rows[1]) - 1
+        count: int = 0
+
+        for row in range(last_row + 1):
+            for col in range(last_col + 1):
+                if self.rows[row][col].value == '@' and self.rows[row][col].adjacent < _THRESHOLD:
+                    # Remove it with a fork lift!
+                    self.rows[row][col] = Cell('.', 0)
+                    count += 1
+
+        return count
 
 
     @property
@@ -138,6 +139,19 @@ class ForkliftMap:
 
         return total
 
+    # @property
+    # def inaccessible_count(self) -> int:
+    #     """Return the number of inaccessible rolls of paper."""
+
+    #     total: int = 0
+    #     for row in self.rows.values():
+    #         for cell in row:
+    #             if cell.value == '@' and cell.adjacent >= _THRESHOLD:
+    #                 total += 1
+
+    #     return total
+
+
 class Day04(DailyChallenge):
     """
     Day 4: Printing Department
@@ -149,8 +163,20 @@ class Day04(DailyChallenge):
         forkie = ForkliftMap(forklift_map)
         #print(forkie)
         forkie.update_adjacencies()
-        print(forkie)
+        #print(forkie)
         return forkie.accessible_count
 
     def _part2(self, use_sample_data: bool=False) -> int:
-        return -1
+        data = self.part1_data if not use_sample_data else self.sample_data
+        forklift_map: list[str] = self.line_to_list(data)
+        forkie = ForkliftMap(forklift_map)
+        forkie.update_adjacencies()
+        total: int = 0
+
+        while True:
+            removed = forkie.remove_reachable()
+            total += removed
+            #print(f"{removed=}")
+            if removed == 0:
+                return total
+            forkie.update_adjacencies()
