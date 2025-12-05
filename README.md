@@ -1,6 +1,6 @@
 # Advent-of-Code-2025
 
-* Install and run (assumes virtual environment in place)
+* Install and run
 
 ```bash
 sudo apt install python3.10-venv
@@ -14,9 +14,10 @@ pip install -e .[dev]   # -e = editable install, use source without rebuild
 python3 -m advent25
 ```
 
-## Code Quality Checks
+## Code Quality & Correctness Checks
 
 ```bash
 pylint --rcfile=.pylintrc src
 mypy --explicit-package-bases --check-untyped-defs .
+python3 -m unittest test/test_challenges.py
 ```
