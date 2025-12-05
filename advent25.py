@@ -28,12 +28,21 @@ def main(argv: argparse.Namespace):
     daily_challenges = dc.challenge_factory(dailies)
     if argv.day is not None:
         today = daily_challenges[argv.day]
-        print(f"{today.sample1}, {today.part1}, {today.sample2}, {today.part2}")
+
+        if argv.sample == True:
+            print(f"{today.sample1}, {today.sample2}")
+        else:
+            print(f"{today.sample1}, {today.part1}, {today.sample2}, {today.part2}")
+
         exit(0)
 
     for day in daily_challenges.values():
-        print(f" {RED}{day.sample1} {GRE}{day.part1} {YEL}{day.sample2} "
-        f"{GRE}{day.part2}{RES}")
+
+        if argv.sample == True:
+            print(f" {RED}{day.sample1} {YEL}{day.sample2} {RES}")
+        else:
+            print(f" {RED}{day.sample1} {GRE}{day.part1} {YEL}{day.sample2} "
+                  f"{GRE}{day.part2}{RES}")
 
 
 if __name__ == "__main__":
@@ -44,5 +53,9 @@ if __name__ == "__main__":
                         "--day",
                         type=int,
                         help="limit output to a specific day's challenges")
+    parser.add_argument("-s",
+                        "--sample",
+                        action="store_true",
+                        help="limit output to sample data set(s)")
     args = parser.parse_args()
     main(args)
