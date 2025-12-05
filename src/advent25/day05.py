@@ -36,7 +36,23 @@ class HelloFresh:
 
     @property
     def safe_count(self) -> int:
+        """Count of safe ingredients we have on hand."""
+
         return len(self.safe_items)
+
+    @property
+    def total_safe_possible(self) -> int:
+        """Count of all safe ingredients that exist."""
+
+        # Correct rough draft that is not memory efficient enough for large
+        #  data sets; it also got killed (presumably by OOM Killer) when I
+        #  converted the ranges to generator expressions.      
+        # total: set[range] = set()
+        # for safe_range in self.fresh_list:
+        #     new_range = range(safe_range.lower, safe_range.upper + 1)
+        #     total.update(new_range)
+        # return len(total)
+
 
 class Day05(DailyChallenge):
     """
@@ -52,4 +68,5 @@ class Day05(DailyChallenge):
     def _part2(self, use_sample_data: bool=False) -> int:
         data = self.part1_data if not use_sample_data else self.sample_data
         inputs: list[str] = self.line_to_list(data)
-        return -1
+        ingredients: HelloFresh = HelloFresh(inputs)
+        return ingredients.total_safe_possible

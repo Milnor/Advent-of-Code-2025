@@ -8,7 +8,7 @@ answers: dict[int, list[int]] = {
     2: [1227775554, 17077011375, 4174379265, 36037497037],
     3: [357, 17316, 3121910778619, 171741365473332],
     4: [13, 1533, 43, 9206],
-    5: [3, 733]
+    5: [3, 733, 14]
 }
 
 daily_challenges: dict[int, dc.DailyChallenge] = dc.challenge_factory(dailies)
@@ -57,6 +57,7 @@ class TestDay04(unittest.TestCase):
     """
     --- Day 4: Printing Department ---
     """
+
     def test_part1(self):
         today = daily_challenges[4]
         self.assertEqual(today.sample1, answers[4][0])

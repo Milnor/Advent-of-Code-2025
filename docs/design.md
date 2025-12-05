@@ -107,8 +107,8 @@ classDiagram
 
 * [x] Days 1-2 - rough draft-y code; install dev dependencies
 
-* [-] Days 3-5 - finalize `DailyChallenge`, its factory, and unittest format
-  * [-] Add cover art to README once the overall theme is clearer
+* [x] Days 3-5 - finalize `DailyChallenge`, its factory, and unittest format
+  * [x] Add cover art to README once the overall theme is clearer
   * [-] Add timer to output to show how long each day takes to run
 
 * [-] Days 6-11 - do the challenges; clean up linting and type checking
